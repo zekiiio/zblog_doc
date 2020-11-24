@@ -2302,12 +2302,24 @@ methods:{
     <template slot-scope="scope">
     	<el-switch
         	v-model="scope.row.is_active"
+            :active-value="1"
+            :inactive-value="0"       
             active-color="lightsteelblue"
             inactive-color="gray">
         </el-switch>
 	</template>
 </el-table-column>
 ```
+
+> 由于后端返回的值是1和0，而不是默认的true和false
+>
+> 因此需要给 :active-value 和 :inactive-value 绑定值
+>
+> 传字符串用 active-value，传值时用 :active-value
+>
+> 用 :active-value = “1”，相当于给 active-value 绑定 1
+>
+> 同 :active-value = “val1”，相当于给 active-value 绑定变量 val1，都忽略了引号 
 
 ### 2.5.4 分页功能
 
@@ -2318,3 +2330,44 @@ ES6 拼接字符串的方法
 ```
 
 > 注意外侧不是单引号，是反向单引号，数字键左侧·~
+
+## 2.6 blogEdit编辑页面
+
+### 2.6.1 获取地址加载md
+
+blogEdit.vue
+
+```js
+mounted() {
+	this.getBlogById()
+},
+methods:{
+	async getBlogById(){
+    	const id = this.$route.params.id
+        const res = await this.$http.get(
+            `http://localhost:18081/`+`blogs/${id}`)
+        const {code, data} = res.data
+        if(code===20000){
+            this.title = data.title
+            this.theme = data.theme
+            this.src = data.location
+            this.loadContent()
+        }
+	},
+    async loadContent(){
+    	const res = await this.$http.get(this.src)
+        this.content = res.data
+    }
+}
+```
+
+不能写成
+
+```
+mounted() {
+	this.getBlogById()
+	this.loadContent()
+},
+```
+
+> 两个异步操作，后一个可能无法获得this.src

@@ -9,7 +9,7 @@ USE blogs;
 #create_time创建时间，modify_time修改时间，
 #is_deleted已删除，is_active已激活令牌token
 CREATE TABLE IF NOT EXISTS tbl_user(
-	id INT NOT NULL,
+	id INT NOT NULL AUTO_INCREMENT,
 	rid INT NOT NULL,
 	username VARCHAR(50) NOT NULL UNIQUE,
 	PASSWORD VARCHAR(50) NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS tbl_user(
 #create_time创建时间，modify_time修改时间，
 #is_active可见，location文件地址
 CREATE TABLE IF NOT EXISTS tbl_blog(
-	id INT NOT NULL,
+	id INT NOT NULL AUTO_INCREMENT,
 	author VARCHAR(50) NOT NULL,
 	title VARCHAR(50) NOT NULL UNIQUE,
 	theme VARCHAR(50) NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS tbl_blog(
 #删除表tbl_user
 DROP TABLE tbl_user;
 #删除表tbl_blog
-DROP TABLE tbl_bog;
+DROP TABLE tbl_blog;
 
 #插入用户数据进表tbl_user
 INSERT INTO tbl_user(id, rid, username, PASSWORD, email, create_time, modify_time, is_deleted, is_active, token) VALUES
@@ -56,5 +56,7 @@ INSERT INTO tbl_blog(id, author, title, theme, create_time, modify_time, is_acti
 (3, "zekio", "Vue基础知识", "js", "2020-11-20 13:07", "", 0, "static/blog/md/Vue_basic.md");
 INSERT INTO tbl_blog(id, author, title, theme, create_time, modify_time, is_active, location) VALUES
 (4, "zekio", "C基础知识", "C", "2020-11-28 13:07", "", 0, "static/blog/md/Vue_basic.md");
+INSERT INTO tbl_blog(id, author, title, theme, create_time, modify_time, is_active, location) VALUES
+(5, "zekio", "C++基础知识", "C", "2020-12-28 13:07", "", 0, "static/blog/md/Vue_basic.md");
 INSERT INTO tbl_blog(id, author, title, theme, create_time, modify_time, is_active, location) VALUES
 (6, "zekio", "Python基础知识", "Python", "2020-11-28 13:07", "", 0, "static/blog/md/Vue_basic.md");
