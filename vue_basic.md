@@ -2371,3 +2371,11 @@ mounted() {
 ```
 
 > 两个异步操作，后一个可能无法获得this.src
+
+> this.src 中为前端文件夹内静态地址static/blog/md/Java_basic.md
+
+> 由于静态地址也是用axios请求得到，因此baseURL属性可能会产生干扰
+>
+> 请求地址为'http://localhost:18081/static/blog/md/Java_basic.md'
+
+### 2.6.2 从数据库text加载md

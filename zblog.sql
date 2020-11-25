@@ -7,7 +7,7 @@ USE blogs;
 #创建数据表：用户表 tbl_user
 #编号id，用户角色rid，用户名username，密码password，邮箱email，
 #create_time创建时间，modify_time修改时间，
-#is_deleted已删除，is_active已激活令牌token
+#is_deleted已删除，is_active已激活，令牌token
 CREATE TABLE IF NOT EXISTS tbl_user(
 	id INT NOT NULL AUTO_INCREMENT,
 	rid INT NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS tbl_user(
 	PRIMARY KEY (id)
 );
 
-#创建数据表：用户表 tbl_blog
+#创建数据表：表 tbl_blog
 #编号id，作者author，标题title，主题theme
 #create_time创建时间，modify_time修改时间，
 #is_active可见，location文件地址
@@ -38,10 +38,21 @@ CREATE TABLE IF NOT EXISTS tbl_blog(
 	PRIMARY KEY (id)
 );
 
+#创建数据表：表 tbl_blogcontent
+#编号id，标题title，内容content
+CREATE TABLE IF NOT EXISTS tbl_blogcontent(
+	id INT NOT NULL AUTO_INCREMENT,
+	title VARCHAR(50) NOT NULL UNIQUE,
+	content TEXT,
+	PRIMARY KEY (id)
+);
+
 #删除表tbl_user
 DROP TABLE tbl_user;
-#删除表tbl_blog
-DROP TABLE tbl_blog;
+#删除表tbl_bloginfo
+DROP TABLE tbl_bloginfo;
+#删除表tbl_content
+DROP TABLE tbl_blogcontent;
 
 #插入用户数据进表tbl_user
 INSERT INTO tbl_user(id, rid, username, PASSWORD, email, create_time, modify_time, is_deleted, is_active, token) VALUES
